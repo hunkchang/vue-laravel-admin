@@ -1,0 +1,32 @@
+{
+    "name": "rovaychang/vue-laravel-admin",
+    "description": "VUE管理后台",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rovay Chang",
+            "email": "rovayhang@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Rovaychang\\Admin": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rovaychang\\Admin\\AdminServiceProvider"
+            ],
+            "aliases": {
+                "Admin": "Rovaychang\\Admin\\AdminFacade"
+            }
+        }
+    }
+}

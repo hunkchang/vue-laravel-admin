@@ -1,0 +1,13 @@
+{
+    "name": "Www",
+    "alias": "www",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Www\\Providers\\WwwServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
