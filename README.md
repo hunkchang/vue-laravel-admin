@@ -39,3 +39,6 @@ yarn run dev (或 npm run dev)
 - Axios
 - Laravel Mix
 - ...
+
+## License
+The vue-Laravel-admin is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
