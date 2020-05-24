@@ -1235,21 +1235,21 @@ class Helper
         return app('hash')->driver('bcrypt')->make($value, $options);
     }
 
-    public static function response($data, $message = '', $code = 200, $headers = [])
+    public static function response($data, $message = '', $code = HttpStatus::HTTP_OK, $headers = [])
     {
         return \Response::json([
             'code' => $code,
             'message' => $message,
             'data' => $data
-        ], 200, $headers);
+        ], HttpStatus::HTTP_OK, $headers);
     }
 
-    public static function responseMessage($message = '', $code = 200)
+    public static function responseMessage($message = '', $code = HttpStatus::HTTP_OK)
     {
         return self::response([], $message, $code);
     }
 
-    public static function responseError($message = '', $code = 400)
+    public static function responseError($message = '', $code = HttpStatus::HTTP_BAD_REQUEST)
     {
         return self::response([], $message, $code);
     }
@@ -1267,7 +1267,7 @@ class Helper
             'url' => $url,
             'isVueRoute' => $isVueRoute,
             'type' => $type
-        ], $message, 301);
+        ], $message, HttpStatus::HTTP_MOVED_PERMANENTLY);
     }
 
 }

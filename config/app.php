@@ -179,7 +179,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
-        App\Providers\AdminUsersServiceProvider::class
+        App\Providers\AdminUsersServiceProvider::class,
+        App\Providers\HttpStatusServiceProvider::class,
 //        Rovaychang\Admin\AdminServiceProvider::class,
     ],
 
@@ -233,8 +234,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'helper'=>App\Facades\Helper\Facade\Helper::class,
-        'adminUsers'=>Modules\Admin\Entities\Admin\Facade\AdminUsers::class
-
+        'adminUsers'=>Modules\Admin\Entities\Admin\Facade\AdminUsers::class,
+        'HttpStatus'=>\App\Facades\Helper\Facade\HttpStatus::class,
     ],
 
 ];
