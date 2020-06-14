@@ -87,9 +87,10 @@ mix.js('Modules/Admin/Resources/assets/vue-element-admin/src/main.js', 'js')
 
 if (!mix.inProduction()) {
     mix.webpackConfig({
-        // devtool: 'source-map',
-        devtool: 'eval-source-map',
+        devtool: 'source-map',
+        // devtool: 'eval-source-map',
     });
+    dianchi
     /**
      *下面方法启用 bs，不传参则使用 laravel-mix 的默认配置
      * 根据实际使用环境配置参数以获得更好体验
