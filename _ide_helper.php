@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.8.1 on 2020-05-24 14:06:48.
+ * Generated for Laravel 7.16.1 on 2020-06-21 02:34:09.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2646,14 +2646,15 @@ namespace Illuminate\Support\Facades {
          * Compile a class component opening.
          *
          * @param string $component
+         * @param string $alias
          * @param string $data
          * @param string $hash
          * @return string 
          * @static 
          */ 
-        public static function compileClassComponentOpening($component, $data, $hash)
+        public static function compileClassComponentOpening($component, $alias, $data, $hash)
         {
-                        return \Illuminate\View\Compilers\BladeCompiler::compileClassComponentOpening($component, $data, $hash);
+                        return \Illuminate\View\Compilers\BladeCompiler::compileClassComponentOpening($component, $alias, $data, $hash);
         }
         
         /**
@@ -2678,6 +2679,19 @@ namespace Illuminate\Support\Facades {
         public static function sanitizeComponentAttribute($value)
         {
                         return \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($value);
+        }
+        
+        /**
+         * Compile Blade echos into valid PHP.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function compileEchos($value)
+        {
+                        /** @var \Illuminate\View\Compilers\BladeCompiler $instance */
+                        return $instance->compileEchos($value);
         }
          
     }
@@ -2926,7 +2940,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a job was dispatched based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -2954,7 +2968,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if a job was dispatched based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -2968,7 +2982,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a job was dispatched after the response was sent based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -2996,7 +3010,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if a job was dispatched based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -3957,7 +3971,7 @@ namespace Illuminate\Support\Facades {
          * @param string $key
          * @param mixed $default
          * @param string|null $path
-         * @return \Symfony\Component\HttpFoundation\Cookie 
+         * @return \Symfony\Component\HttpFoundation\Cookie|null 
          * @static 
          */ 
         public static function queued($key, $default = null, $path = null)
@@ -4224,6 +4238,20 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Database\DatabaseManager $instance */
                         return $instance->reconnect($name);
+        }
+        
+        /**
+         * Set the default database connection for the callback execution.
+         *
+         * @param string $name
+         * @param callable $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function usingConnection($name, $callback)
+        {
+                        /** @var \Illuminate\Database\DatabaseManager $instance */
+                        return $instance->usingConnection($name, $callback);
         }
         
         /**
@@ -5425,7 +5453,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if an event was dispatched based on a truth-test callback.
          *
-         * @param string $event
+         * @param string|\Closure $event
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -5453,7 +5481,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if an event was dispatched based on a truth-test callback.
          *
-         * @param string $event
+         * @param string|\Closure $event
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -5770,6 +5798,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Filesystem\Filesystem $instance */
                         return $instance->extension($path);
+        }
+        
+        /**
+         * Guess the file extension from the mime-type of a given file.
+         *
+         * @param string $path
+         * @return string|null 
+         * @static 
+         */ 
+        public static function guessExtension($path)
+        {
+                        /** @var \Illuminate\Filesystem\Filesystem $instance */
+                        return $instance->guessExtension($path);
         }
         
         /**
@@ -6517,32 +6558,33 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static \Illuminate\Http\Client\PendingRequest asJson()
+     * @method static \Illuminate\Http\Client\PendingRequest accept(string $contentType)
+     * @method static \Illuminate\Http\Client\PendingRequest acceptJson()
      * @method static \Illuminate\Http\Client\PendingRequest asForm()
-     * @method static \Illuminate\Http\Client\PendingRequest attach(string $name, string $contents, string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest asJson()
      * @method static \Illuminate\Http\Client\PendingRequest asMultipart()
+     * @method static \Illuminate\Http\Client\PendingRequest attach(string $name, string $contents, string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest bodyFormat(string $format)
      * @method static \Illuminate\Http\Client\PendingRequest contentType(string $contentType)
-     * @method static \Illuminate\Http\Client\PendingRequest acceptJson()
-     * @method static \Illuminate\Http\Client\PendingRequest accept(string $contentType)
      * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, int $sleep = 0)
-     * @method static \Illuminate\Http\Client\PendingRequest withHeaders(array $headers)
+     * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
+     * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
      * @method static \Illuminate\Http\Client\PendingRequest withBasicAuth(string $username, string $password)
-     * @method static \Illuminate\Http\Client\PendingRequest withDigestAuth(string $username, string $password)
-     * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      * @method static \Illuminate\Http\Client\PendingRequest withCookies(array $cookies, string $domain)
+     * @method static \Illuminate\Http\Client\PendingRequest withDigestAuth(string $username, string $password)
+     * @method static \Illuminate\Http\Client\PendingRequest withHeaders(array $headers)
+     * @method static \Illuminate\Http\Client\PendingRequest withOptions(array $options)
+     * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      * @method static \Illuminate\Http\Client\PendingRequest withoutRedirecting()
      * @method static \Illuminate\Http\Client\PendingRequest withoutVerifying()
-     * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
-     * @method static \Illuminate\Http\Client\PendingRequest withOptions(array $options)
-     * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
-     * @method static \Illuminate\Http\Client\Response get(string $url, array $query = [])
-     * @method static \Illuminate\Http\Client\Response post(string $url, array $data = [])
-     * @method static \Illuminate\Http\Client\Response patch(string $url, array $data = [])
-     * @method static \Illuminate\Http\Client\Response put(string $url, array $data = [])
      * @method static \Illuminate\Http\Client\Response delete(string $url, array $data = [])
+     * @method static \Illuminate\Http\Client\Response get(string $url, array $query = [])
+     * @method static \Illuminate\Http\Client\Response head(string $url, array $query = [])
+     * @method static \Illuminate\Http\Client\Response patch(string $url, array $data = [])
+     * @method static \Illuminate\Http\Client\Response post(string $url, array $data = [])
+     * @method static \Illuminate\Http\Client\Response put(string $url, array $data = [])
      * @method static \Illuminate\Http\Client\Response send(string $method, string $url, array $options = [])
-     * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
      * @see \Illuminate\Http\Client\Factory
      */ 
     class Http {
@@ -7406,7 +7448,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a mailable was sent based on a truth-test callback.
          *
-         * @param string $mailable
+         * @param string|\Closure $mailable
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -7446,7 +7488,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a mailable was queued based on a truth-test callback.
          *
-         * @param string $mailable
+         * @param string|\Closure $mailable
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -7781,7 +7823,7 @@ namespace Illuminate\Support\Facades {
          * Assert if a notification was sent based on a truth-test callback.
          *
          * @param mixed $notifiable
-         * @param string $notification
+         * @param string|\Closure $notification
          * @param callable|null $callback
          * @return void 
          * @throws \Exception
@@ -7812,7 +7854,7 @@ namespace Illuminate\Support\Facades {
          * Determine if a notification was sent based on a truth-test callback.
          *
          * @param mixed $notifiable
-         * @param string $notification
+         * @param string|\Closure $notification
          * @param callable|null $callback
          * @return void 
          * @throws \Exception
@@ -7923,8 +7965,8 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static string sendResetLink(array $credentials)
      * @method static mixed reset(array $credentials, \Closure $callback)
+     * @method static string sendResetLink(array $credentials)
      * @see \Illuminate\Auth\Passwords\PasswordBroker
      */ 
     class Password {
@@ -8150,7 +8192,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a job was pushed based on a truth-test callback.
          *
-         * @param string $job
+         * @param string|\Closure $job
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -8165,7 +8207,7 @@ namespace Illuminate\Support\Facades {
          * Assert if a job was pushed based on a truth-test callback.
          *
          * @param string $queue
-         * @param string $job
+         * @param string|\Closure $job
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -8208,7 +8250,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if a job was pushed based on a truth-test callback.
          *
-         * @param string $job
+         * @param string|\Closure $job
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -8998,7 +9040,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the client user agent.
          *
-         * @return string 
+         * @return string|null 
          * @static 
          */ 
         public static function userAgent()
@@ -10214,8 +10256,8 @@ namespace Illuminate\Support\Facades {
         
         /**
          * Gets the preferred format for the response by inspecting, in the following order:
-         *   * the request format set using setRequestFormat
-         *   * the values of the Accept HTTP header
+         *   * the request format set using setRequestFormat;
+         *   * the values of the Accept HTTP header.
          * 
          * Note that if you use this method, you should send the "Vary: Accept" header
          * in the response to prevent any issues with intermediary HTTP caches.
@@ -10310,6 +10352,19 @@ namespace Illuminate\Support\Facades {
             //Method inherited from \Symfony\Component\HttpFoundation\Request            
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->isXmlHttpRequest();
+        }
+        
+        /**
+         * Checks whether the client browser prefers safe content or not according to RFC8674.
+         *
+         * @see https://tools.ietf.org/html/rfc8674
+         * @static 
+         */ 
+        public static function preferSafeContent()
+        {
+            //Method inherited from \Symfony\Component\HttpFoundation\Request            
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->preferSafeContent();
         }
         
         /**
@@ -11163,13 +11218,13 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static \Illuminate\Routing\RouteRegistrar prefix(string  $prefix)
-     * @method static \Illuminate\Routing\RouteRegistrar where(array  $where)
-     * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar as(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
+     * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar namespace(string $value)
+     * @method static \Illuminate\Routing\RouteRegistrar prefix(string  $prefix)
+     * @method static \Illuminate\Routing\RouteRegistrar where(array  $where)
      * @see \Illuminate\Routing\Router
      */ 
     class Route {
@@ -12386,6 +12441,30 @@ namespace Illuminate\Support\Facades {
      * @see \Illuminate\Session\Store
      */ 
     class Session {
+        
+        /**
+         * Determine if requests for the same session should wait for each to finish before executing.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function shouldBlock()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->shouldBlock();
+        }
+        
+        /**
+         * Get the name of the cache store / driver that should be used to acquire session locks.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function blockDriver()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->blockDriver();
+        }
         
         /**
          * Get the session configuration.
@@ -14748,7 +14827,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Start a component rendering process.
          *
-         * @param \Illuminate\View\View|string $view
+         * @param \Illuminate\View\View|\Closure|string $view
          * @param array $data
          * @return void 
          * @static 
@@ -16980,6 +17059,21 @@ namespace Modules\Admin\Entities\Admin\Facade {
         }
         
         /**
+         * Eager load relationships on the polymorphic relation of a model.
+         *
+         * @param string $relation
+         * @param array $relations
+         * @return \Modules\Admin\Entities\Admin\AdminUsers 
+         * @static 
+         */ 
+        public static function loadMorph($relation, $relations)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->loadMorph($relation, $relations);
+        }
+        
+        /**
          * Eager load relations on the model if they are not already eager loaded.
          *
          * @param array|string $relations
@@ -17005,6 +17099,21 @@ namespace Modules\Admin\Entities\Admin\Facade {
             //Method inherited from \Illuminate\Database\Eloquent\Model            
                         /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
                         return $instance->loadCount($relations);
+        }
+        
+        /**
+         * Eager load relationship counts on the polymorphic relation of a model.
+         *
+         * @param string $relation
+         * @param array $relations
+         * @return \Modules\Admin\Entities\Admin\AdminUsers 
+         * @static 
+         */ 
+        public static function loadMorphCount($relation, $relations)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->loadMorphCount($relation, $relations);
         }
         
         /**
@@ -17067,7 +17176,7 @@ namespace Modules\Admin\Entities\Admin\Facade {
         /**
          * Destroy the models for the given IDs.
          *
-         * @param \Illuminate\Support\Collection|array|int $ids
+         * @param \Illuminate\Support\Collection|array|int|string $ids
          * @return int 
          * @static 
          */ 
@@ -17256,6 +17365,35 @@ namespace Modules\Admin\Entities\Admin\Facade {
             //Method inherited from \Illuminate\Database\Eloquent\Model            
                         /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
                         return $instance->newPivot($parent, $attributes, $table, $exists, $using);
+        }
+        
+        /**
+         * Determine if the model has a given scope.
+         *
+         * @param string $scope
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasNamedScope($scope)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->hasNamedScope($scope);
+        }
+        
+        /**
+         * Apply the given named scope if possible.
+         *
+         * @param string $scope
+         * @param array $parameters
+         * @return mixed 
+         * @static 
+         */ 
+        public static function callNamedScope($scope, $parameters = [])
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->callNamedScope($scope, $parameters);
         }
         
         /**
@@ -18614,6 +18752,20 @@ namespace Modules\Admin\Entities\Admin\Facade {
         }
         
         /**
+         * Define a dynamic relation resolver.
+         *
+         * @param string $name
+         * @param \Closure $callback
+         * @return void 
+         * @static 
+         */ 
+        public static function resolveRelationUsing($name, $callback)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        \Modules\Admin\Entities\Admin\AdminUsers::resolveRelationUsing($name, $callback);
+        }
+        
+        /**
          * Define a one-to-one relationship.
          *
          * @param string $related
@@ -19233,6 +19385,21 @@ namespace Modules\Admin\Entities\Admin\Facade {
         }
         
         /**
+         * Make the given, typically hidden, attributes visible if the given truth test passes.
+         *
+         * @param bool|\Closure $condition
+         * @param array|string|null $attributes
+         * @return \Modules\Admin\Entities\Admin\AdminUsers 
+         * @static 
+         */ 
+        public static function makeVisibleIf($condition, $attributes)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->makeVisibleIf($condition, $attributes);
+        }
+        
+        /**
          * Make the given, typically visible, attributes hidden.
          *
          * @param array|string|null $attributes
@@ -19244,6 +19411,21 @@ namespace Modules\Admin\Entities\Admin\Facade {
             //Method inherited from \Illuminate\Database\Eloquent\Model            
                         /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
                         return $instance->makeHidden($attributes);
+        }
+        
+        /**
+         * Make the given, typically visible, attributes hidden if the given truth test passes.
+         *
+         * @param bool|\Closure $truthTest
+         * @param array|string|null $attributes
+         * @return \Modules\Admin\Entities\Admin\AdminUsers 
+         * @static 
+         */ 
+        public static function makeHiddenIf($condition, $attributes)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->makeHiddenIf($condition, $attributes);
         }
         
         /**
@@ -19274,6 +19456,20 @@ namespace Modules\Admin\Entities\Admin\Facade {
         }
         
         /**
+         * Merge new fillable attributes with existing fillable attributes on the model.
+         *
+         * @param array $fillable
+         * @return \Modules\Admin\Entities\Admin\AdminUsers 
+         * @static 
+         */ 
+        public static function mergeFillable($fillable)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->mergeFillable($fillable);
+        }
+        
+        /**
          * Get the guarded attributes for the model.
          *
          * @return array 
@@ -19298,6 +19494,20 @@ namespace Modules\Admin\Entities\Admin\Facade {
             //Method inherited from \Illuminate\Database\Eloquent\Model            
                         /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
                         return $instance->guard($guarded);
+        }
+        
+        /**
+         * Merge new guarded attributes with existing guarded attributes on the model.
+         *
+         * @param array $guarded
+         * @return \Modules\Admin\Entities\Admin\AdminUsers 
+         * @static 
+         */ 
+        public static function mergeGuarded($guarded)
+        {
+            //Method inherited from \Illuminate\Database\Eloquent\Model            
+                        /** @var \Modules\Admin\Entities\Admin\AdminUsers $instance */
+                        return $instance->mergeGuarded($guarded);
         }
         
         /**
@@ -21123,7 +21333,7 @@ namespace  {
             }
          
             /**
-             * Execute a callback over each item while chunking by id.
+             * Execute a callback over each item while chunking by ID.
              *
              * @param callable $callback
              * @param int $count
@@ -21170,7 +21380,7 @@ namespace  {
              * Pass the query to a given callback.
              *
              * @param callable $callback
-             * @return \Illuminate\Database\Query\Builder 
+             * @return \Illuminate\Database\Eloquent\Builder 
              * @static 
              */ 
             public static function tap($callback)
@@ -21485,7 +21695,7 @@ namespace  {
             /**
              * Add a subselect expression to the query.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|string $query
+             * @param \Closure|$this|string $query
              * @param string $as
              * @return \Illuminate\Database\Query\Builder 
              * @throws \InvalidArgumentException
@@ -21914,6 +22124,20 @@ namespace  {
             }
          
             /**
+             * Add an "or where in raw" clause for integer values to the query.
+             *
+             * @param string $column
+             * @param \Illuminate\Contracts\Support\Arrayable|array $values
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereIntegerInRaw($column, $values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereIntegerInRaw($column, $values);
+            }
+         
+            /**
              * Add a "where not in raw" clause for integer values to the query.
              *
              * @param string $column
@@ -21926,6 +22150,20 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->whereIntegerNotInRaw($column, $values, $boolean);
+            }
+         
+            /**
+             * Add an "or where not in raw" clause for integer values to the query.
+             *
+             * @param string $column
+             * @param \Illuminate\Contracts\Support\Arrayable|array $values
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereIntegerNotInRaw($column, $values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereIntegerNotInRaw($column, $values);
             }
          
             /**
