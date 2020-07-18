@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Admin;
 
+use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Modules\Admin\Entities\Admin\AdminUsers;
 use Str;
@@ -39,7 +40,14 @@ class Test extends Command
      */
     public function handle()
     {
-        AdminUsers::create(
+
+        $client = new Client();
+        $request = $client->get('https://www.amazon.com/-/zh/gp/page/refresh?acAsin=B081QZ6FS2&asinList=B07LF3FYY9&auiAjax=1&parentAsin=B07C7Y3166&pgid=apparel_display_on_website&psc=1&triggerEvent=Twister',['proxy'=>'socks5://127.0.0.1:1086']);
+        $responseText =  $request->getBody()->getContents();
+
+        $responseArr = explode('&&&',$responseText);
+        print_r($responseArr);
+        /*AdminUsers::create(
             [
                 'username' => 'admin',
                 'password' => \Hash::make('admin'),
@@ -48,6 +56,6 @@ class Test extends Command
             ]
         );
 
-        $this->info('密码生成成功');
+        $this->info('密码生成成功');*/
     }
 }
